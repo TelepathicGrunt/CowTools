@@ -1,0 +1,195 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cow",
+    "minecraft:mooshroom",
+    {
+      "id": "#c:cows",
+      "required": false
+    },
+    {
+      "id": "bovinesandbuttercups:moobloom",
+      "required": false
+    },
+    {
+      "id": "buzzier_bees:moobloom",
+      "required": false
+    },
+    {
+      "id": "charm:moobloom",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:moobloom",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:moolip",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:wooly_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:umbra_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:ashen_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:albino_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:cream_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:cookie_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:dairy_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:pinto_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:sunset_cow",
+      "required": false
+    },
+    {
+      "id": "earthmobsmod:magma_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:moobloom",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:albino_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:wooly_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:ashen_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:sunset_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:cookie_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:moolip",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:pinto_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:cream_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:dairy_cow",
+      "required": false
+    },
+    {
+      "id": "earthtojavamobs:umbra_cow",
+      "required": false
+    },
+    {
+      "id": "flowers:moobloom",
+      "required": false
+    },
+    {
+      "id": "friendsandfoes:moobloom",
+      "required": false
+    },
+    {
+      "id": "honey_bucket:moobloom",
+      "required": false
+    },
+    {
+      "id": "lostfeatures:moobloom",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:umbra_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:ashen_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:brule_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:albino_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:moolip",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:pink_moobloom",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:cookie_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:dairy_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:pinto_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:sunset_cow",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:moobloom",
+      "required": false
+    },
+    {
+      "id": "minecraft_earth_mod:wooly_cow",
+      "required": false
+    },
+    {
+      "id": "moobloomforge:moobloom",
+      "required": false
+    },
+    {
+      "id": "moocow:moobloom",
+      "required": false
+    },
+    {
+      "id": "tropicraft:cowktail",
+      "required": false
+    },
+    {
+      "id": "witherstormmod:sickened_mushroom_cow",
+      "required": false
+    }
+  ]
+}

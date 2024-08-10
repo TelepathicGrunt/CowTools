@@ -1,0 +1,22 @@
+{
+  "itemGroup.cow_tools": "Cow Tools",
+  "itemGroup.cow_tools.main_tab": "Cow Tools",
+
+  "item.cow_tools.tool_a": "Cow Tools",
+  "item.cow_tools.tool_a.hint": "Two flat bottom stones with one having a handle. How could anyone use this?",
+  "item.cow_tools.tool_b": "Cow Tools",
+  "item.cow_tools.tool_b.hint": "A hardened hooked stick... What could it be for?",
+  "item.cow_tools.tool_c": "Cow Tools",
+
+  "tag.item.cow_tools.cow_tools": "Cow Tools",
+  "tag.item.cow_tools.tool_a_cow_trade": "Cow Tool A Trades",
+  "tag.item.cow_tools.tool_b_cow_trade": "Cow Tool B Trades",
+  "tag.item.cow_tools.tool_c_cow_trade": "Cow Tool C Trades",
+
+  "tag.block.cow_tools.tool_c_duplicate_drops_of": "Cow Tool C Can Ore Duplicate",
+  "tag.block.cow_tools.tool_c_cannot_duplicate_drops_of_ever": "Cow Tool C Cannot Ore Duplicate",
+
+  "tag.entity_type.cow_tools.cows_for_getting_tools": "Tradeable Cows",
+  "tag.entity_type.cow_tools.tool_b_additional_can_pull": "Cow Tool B Additional Can Pull",
+  "tag.entity_type.cow_tools.tool_b_cannot_pull_ever": "Cow Tool B Cannot Pull Ever"
+}

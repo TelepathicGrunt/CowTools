@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "cow_tools:tool_a",
+    "cow_tools:tool_b",
+    "cow_tools:tool_c"
+  ]
+}
