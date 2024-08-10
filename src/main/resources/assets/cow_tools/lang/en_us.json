@@ -7,6 +7,7 @@
   "item.cow_tools.tool_b": "Cow Tools",
   "item.cow_tools.tool_b.hint": "A hardened hooked stick... What could it be for?",
   "item.cow_tools.tool_c": "Cow Tools",
+  "item.cow_tools.tool_c.hint": "Reminiscent of a specific human tool... Probably not used for same purpose...",
 
   "tag.item.cow_tools.cow_tools": "Cow Tools",
   "tag.item.cow_tools.tool_a_cow_trade": "Cow Tool A Trades",
