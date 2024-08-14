@@ -5,7 +5,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
@@ -26,7 +25,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import telepathicgrunt.cowtools.CowToolsMod;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ToolA extends Item {
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
@@ -84,12 +82,6 @@ public class ToolA extends Item {
         if (state.is(CANNOT_REVERT_STATE)) {
             return null;
         }
-        else if (state.is(Blocks.DAMAGED_ANVIL)) {
-            return Blocks.CHIPPED_ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING));
-        }
-        else if (state.is(Blocks.CHIPPED_ANVIL)) {
-            return Blocks.ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING));
-        }
 
         ResourceLocation rl = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         String modifiedPath = modifiedPath(rl.getPath());
@@ -114,24 +106,36 @@ public class ToolA extends Item {
     }
 
     private static String modifiedPath(String path) {
-        String modifiedPath = replacedSubstrings(path,
+        String modifiedPath = replaceFirstMatchSubstring(path, "damaged", "chipped");
+        if (!modifiedPath.equals(path)) {
+            return modifiedPath;
+        }
+
+        modifiedPath = removeFirstMatchedSubstring(path,
                 "cracked",
                 "mossy",
                 "polished",
                 "chiseled",
                 "smooth",
-                "cut");
-
+                "cut",
+                "chipped");
         return modifiedPath.equals(path) ? null : modifiedPath;
     }
 
-    private static String replacedSubstrings(String original, String... replacements) {
+    private static String replaceFirstMatchSubstring(String original, String match, String replacement) {
+        return original
+                .replaceFirst("^" + match + "_", replacement + "_")
+                .replaceFirst("_" + match + "$", "_" + replacement)
+                .replaceFirst("_" + match + "_", "_" + replacement + "_");
+    }
+
+    private static String removeFirstMatchedSubstring(String original, String... removals) {
         String newString = original;
-        for (String replacement : replacements) {
+        for (String removal : removals) {
             newString = original
-                    .replaceFirst("^" + replacement + "_", "")
-                    .replaceFirst("_" + replacement + "$", "")
-                    .replaceFirst("_" + replacement + "_", "_");
+                    .replaceFirst("^" + removal + "_", "")
+                    .replaceFirst("_" + removal + "$", "")
+                    .replaceFirst("_" + removal + "_", "_");
 
             if (!newString.equals(original)) {
                 break;
