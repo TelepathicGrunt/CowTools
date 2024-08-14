@@ -30,6 +30,7 @@ import java.util.Optional;
 
 public class ToolA extends Item {
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
+    private static final TagKey<Block> CANNOT_REVERT_STATE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cannot_revert_state"));
 
     public ToolA() {
         super(new Item.Properties().durability(64).component(DataComponents.TOOL, createToolProperties()));
@@ -80,7 +81,10 @@ public class ToolA extends Item {
     }
 
     private static BlockState repairState(BlockState state) {
-        if (state.is(Blocks.DAMAGED_ANVIL)) {
+        if (state.is(CANNOT_REVERT_STATE)) {
+            return null;
+        }
+        else if (state.is(Blocks.DAMAGED_ANVIL)) {
             return Blocks.CHIPPED_ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING));
         }
         else if (state.is(Blocks.CHIPPED_ANVIL)) {
