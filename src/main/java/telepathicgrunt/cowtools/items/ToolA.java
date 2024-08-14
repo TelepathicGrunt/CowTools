@@ -2,6 +2,7 @@ package telepathicgrunt.cowtools.items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,8 +18,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import telepathicgrunt.cowtools.CowToolsMod;
 
@@ -80,9 +83,56 @@ public class ToolA extends Item {
         if (state.is(Blocks.DAMAGED_ANVIL)) {
             return Blocks.CHIPPED_ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING));
         }
-        else {
-            return state.is(Blocks.CHIPPED_ANVIL) ?
-                    Blocks.ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING)) : null;
+        else if (state.is(Blocks.CHIPPED_ANVIL)) {
+            return Blocks.ANVIL.defaultBlockState().setValue(AnvilBlock.FACING, state.getValue(AnvilBlock.FACING));
         }
+
+        ResourceLocation rl = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        String modifiedPath = modifiedPath(rl.getPath());
+        if (modifiedPath != null) {
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), modifiedPath));
+            if (block != null && !block.defaultBlockState().isAir()) {
+                BlockState newState = block.defaultBlockState();
+                for (Property<?> property : state.getProperties()) {
+                    if (newState.hasProperty(property)) {
+                        newState = getStateWithProperty(newState, state, property);
+                    }
+                }
+                return newState;
+            }
+        }
+
+        return null;
+    }
+
+    private static <T extends Comparable<T>> BlockState getStateWithProperty(BlockState state, BlockState stateToCopy, Property<T> property) {
+        return state.setValue(property, stateToCopy.getValue(property));
+    }
+
+    private static String modifiedPath(String path) {
+        String modifiedPath = replacedSubstrings(path,
+                "cracked",
+                "mossy",
+                "polished",
+                "chiseled",
+                "smooth",
+                "cut");
+
+        return modifiedPath.equals(path) ? null : modifiedPath;
+    }
+
+    private static String replacedSubstrings(String original, String... replacements) {
+        String newString = original;
+        for (String replacement : replacements) {
+            newString = original
+                    .replaceFirst("^" + replacement + "_", "")
+                    .replaceFirst("_" + replacement + "$", "")
+                    .replaceFirst("_" + replacement + "_", "_");
+
+            if (!newString.equals(original)) {
+                break;
+            }
+        }
+        return newString;
     }
 }
