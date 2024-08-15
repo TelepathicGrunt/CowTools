@@ -1,6 +1,35 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "cow_tools:item/tool_b"
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "minecraft:item/handheld",
+    "textures": {
+      "layer0": "cow_tools:item/tool_b"
+    }
+  },
+  "perspectives": {
+    "thirdperson_righthand": {
+      "parent": "cow_tools:item/tool_b_player",
+      "textures": {
+        "layer0": "cow_tools:item/tool_b_large"
+      }
+    },
+    "thirdperson_lefthand": {
+      "parent": "cow_tools:item/tool_b_player",
+      "textures": {
+        "layer0": "cow_tools:item/tool_b_large"
+      }
+    },
+    "firstperson_righthand": {
+      "parent": "cow_tools:item/tool_b_player",
+      "textures": {
+        "layer0": "cow_tools:item/tool_b_large"
+      }
+    },
+    "firstperson_lefthand": {
+      "parent": "cow_tools:item/tool_b_player",
+      "textures": {
+        "layer0": "cow_tools:item/tool_b_large"
+      }
+    }
   }
 }

@@ -10,6 +10,7 @@ displayName="Cow Tools"
 logoFile="cowtools.png"
 logoBlur=false
 authors="TelepathicGrunt"
+credits="CrispyTwig for textures!"
 description='''See https://en.wikipedia.org/wiki/Cow_tools for more details.'''
 
 #[[mixins]]
