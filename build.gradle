@@ -99,7 +99,7 @@ if (uploadSettings != null && uploadDependencies != null) {
         type = STABLE
         changelog = changelogText
 
-        displayName = "Cow Tools v${rootProject.mod_version} (${rootProject.minecraft_version})"
+        displayName = "Cow Tools v${project.mod_version} (${project.minecraft_version})"
         version = "${project.version}"
         modLoaders.add("neoforge")
 
@@ -107,7 +107,7 @@ if (uploadSettings != null && uploadDependencies != null) {
             curseforge {
                 accessToken = ENV.CURSEFORGEKEY
                 projectId = uploadSettings["curse-id"]
-                minecraftVersions.add(rootProject.minecraft_version)
+                minecraftVersions.add(project.minecraft_version)
 
                 if (uploadDependencies.size() > 0) {
                     uploadDependencies.each { dep, required ->
@@ -126,7 +126,7 @@ if (uploadSettings != null && uploadDependencies != null) {
             modrinth {
                 accessToken = ENV.MODRINTH_TOKEN
                 projectId = uploadSettings["modrinth-id"]
-                minecraftVersions.add(rootProject.minecraft_version)
+                minecraftVersions.add(project.minecraft_version)
 
                 dependencies {
                     uploadDependencies.each { dep, required ->
