@@ -2,7 +2,10 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '1.0.14'
+    id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
+
+apply plugin: "me.modmuss50.mod-publish-plugin"
 
 tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
@@ -65,19 +68,6 @@ configurations {
 dependencies {
 }
 
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
-    }
-}
-
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
@@ -89,3 +79,118 @@ idea {
         downloadJavadoc = true
     }
 }
+
+////////////////////////////////////////////RELEASING/////////////////////////////////////////////
+version = "${rootProject.mod_version}+${rootProject.minecraft_version}"
+var ENV = System.getenv()
+def uploadSettings = [
+        "curse-id": "1084137",
+        "modrinth-id": "OnioDxG7"
+]
+def uploadDependencies = []
+
+if (uploadSettings != null && uploadDependencies != null) {
+
+    File changeLog = rootProject.file("CHANGELOG.md")
+    String changelogText = changeLog.exists() ? changeLog.text : ""
+
+    publishMods {
+        file = tasks.jar.archiveFile
+        type = STABLE
+        changelog = changelogText
+
+        displayName = "Cow Tools v${rootProject.mod_version} (${rootProject.minecraft_version})"
+        version = "${project.version}"
+        modLoaders.add("neoforge")
+
+        if (ENV.CURSEFORGEKEY) {
+            curseforge {
+                accessToken = ENV.CURSEFORGEKEY
+                projectId = uploadSettings["curse-id"]
+                minecraftVersions.add(rootProject.minecraft_version)
+
+                if (uploadDependencies.size() > 0) {
+                    uploadDependencies.each { dep, required ->
+                        if (required) {
+                            requires(dep)
+                        }
+                        else {
+                            optional(dep)
+                        }
+                    }
+                }
+            }
+        }
+
+        if (ENV.MODRINTH_TOKEN) {
+            modrinth {
+                accessToken = ENV.MODRINTH_TOKEN
+                projectId = uploadSettings["modrinth-id"]
+                minecraftVersions.add(rootProject.minecraft_version)
+
+                dependencies {
+                    uploadDependencies.each { dep, required ->
+                        if (required) {
+                            requires(dep)
+                        } else {
+                            optional(dep)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+
+            artifactId = mod_id
+
+            pom {
+                name = 'Cow Tools'
+                description = 'A controversial The Far Side comic brought to life'
+                url = 'https://github.com/TelepathicGrunt/CowTools'
+
+                scm {
+                    connection = 'git:https://github.com/TelepathicGrunt/CowTools.git'
+                    developerConnection = 'git:https://github.com/TelepathicGrunt/CowTools.git'
+                    url = 'https://github.com/TelepathicGrunt/CowTools'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/TelepathicGrunt/CowTools/blob/master/LICENSE.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'telepathic_grunt'
+                        name = 'TelepathicGrunt'
+                        email = 'asarnesespam@gmail.com'
+                    }
+                }
+            }
+
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://nexus.resourcefulbees.com/repository/telepathicgrunt/")
+            credentials {
+                username ENV.MAVEN_USER
+                password ENV.MAVEN_PASS
+            }
+        }
+    }
+}
+
+tasks.register('buildAndRelease') {}
+tasks.publish.mustRunAfter tasks.build
+tasks.publishMods.mustRunAfter tasks.publish
+tasks.buildAndRelease.dependsOn(tasks.build, tasks.publish, tasks.publishMods)
