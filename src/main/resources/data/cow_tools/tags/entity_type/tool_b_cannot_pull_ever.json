@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:bosses"
+    "#c:bosses",
+    "#c:capturing_not_supported"
   ]
 }

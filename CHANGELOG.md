@@ -1,1 +1,1 @@
-Improved item textures
+Adjusted Tool B's behavior to respect some mod's tagging.
