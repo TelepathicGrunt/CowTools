@@ -1,7 +1,9 @@
 package telepathicgrunt.cowtools.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -25,12 +27,13 @@ public class ToolC extends Item {
     private static final TagKey<Block> DUPLICATE_DROPS_OF = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_duplicate_drops_of"));
     private static final TagKey<Block> CANNOT_DUPLICATE_DROPS_OF_EVER = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cannot_duplicate_drops_of_ever"));
 
-    public ToolC() {
-        super(new Properties().durability(1000).component(DataComponents.TOOL, createToolProperties()));
+    public ToolC(Properties itemProperty) {
+        super(itemProperty.durability(1000).component(DataComponents.TOOL, createToolProperties()));
     }
 
     public static Tool createToolProperties() {
-        return new Tool(List.of(Tool.Rule.minesAndDrops(DUPLICATE_DROPS_OF, 5.0F)), 1.0F, 1);
+        HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        return new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(DUPLICATE_DROPS_OF), 5.0F)), 1.0F, 1);
     }
 
     @Override

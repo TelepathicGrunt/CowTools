@@ -27,9 +27,9 @@ public class CowToolsMod {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final DeferredItem<Item> TOOL_A = ITEMS.register("tool_a", ToolA::new);
-    public static final DeferredItem<Item> TOOL_B = ITEMS.register("tool_b", ToolB::new);
-    public static final DeferredItem<Item> TOOL_C = ITEMS.register("tool_c", ToolC::new);
+    public static final DeferredItem<Item> TOOL_A = ITEMS.registerItem("tool_a", ToolA::new);
+    public static final DeferredItem<Item> TOOL_B = ITEMS.registerItem("tool_b", ToolB::new);
+    public static final DeferredItem<Item> TOOL_C = ITEMS.registerItem("tool_c", ToolC::new);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COW_TOOLS_TAB = CREATIVE_MODE_TABS.register("cow_tools",
         () -> CreativeModeTab.builder()

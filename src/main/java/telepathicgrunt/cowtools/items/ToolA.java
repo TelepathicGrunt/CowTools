@@ -1,6 +1,7 @@
 package telepathicgrunt.cowtools.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -16,22 +17,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import telepathicgrunt.cowtools.CowToolsMod;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ToolA extends Item {
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
     private static final TagKey<Block> CANNOT_REVERT_STATE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cannot_revert_state"));
 
-    public ToolA() {
-        super(new Item.Properties().durability(64).component(DataComponents.TOOL, createToolProperties()));
+    public ToolA(Properties itemProperty) {
+        super(itemProperty.durability(64).component(DataComponents.TOOL, createToolProperties()));
     }
 
     public static Tool createToolProperties() {
@@ -86,9 +86,9 @@ public class ToolA extends Item {
         ResourceLocation rl = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         String modifiedPath = modifiedPath(rl.getPath());
         if (modifiedPath != null) {
-            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), modifiedPath));
-            if (block != null && !block.defaultBlockState().isAir()) {
-                BlockState newState = block.defaultBlockState();
+            Optional<Holder.Reference<Block>> blockOptional = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), modifiedPath));
+            if (blockOptional.isPresent() && !blockOptional.get().value().defaultBlockState().isAir()) {
+                BlockState newState = blockOptional.get().value().defaultBlockState();
                 for (Property<?> property : state.getProperties()) {
                     if (newState.hasProperty(property)) {
                         newState = getStateWithProperty(newState, state, property);

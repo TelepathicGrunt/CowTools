@@ -1,5 +1,8 @@
 {
   "parent": "item/generated",
+  "textures": {
+    "layer0": "cow_tools:item/tool_b_large"
+  },
   "display": {
     "thirdperson_righthand": {
       "rotation": [ 0, -90, 55 ],

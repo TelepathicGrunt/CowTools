@@ -32,8 +32,8 @@ public class ToolB extends Item {
     private static final TagKey<EntityType<?>> CANNOT_PULL_EVER = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cannot_pull_ever"));
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cow_trade"));
 
-    public ToolB() {
-        super(new Properties().durability(300).component(DataComponents.TOOL, createToolProperties()));
+    public ToolB(Properties itemProperty) {
+        super(itemProperty.durability(300).component(DataComponents.TOOL, createToolProperties()));
     }
 
     public static Tool createToolProperties() {

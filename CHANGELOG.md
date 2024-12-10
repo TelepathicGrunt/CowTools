@@ -1,1 +1,1 @@
-Adjusted Tool B's behavior to respect some mod's tagging.
+Updated to 1.21.4

@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "cow_tools:item/tool_a"
+  }
+}
