@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,6 +26,7 @@ import telepathicgrunt.cowtools.CowToolsMod;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class ToolA extends Item {
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
@@ -35,13 +37,13 @@ public class ToolA extends Item {
     }
 
     public static Tool createToolProperties() {
-        return new Tool(List.of(), 1.0F, 1);
+        return new Tool(List.of(), 1.0F, 1, true);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
-        list.add(Component.translatable("item.cow_tools.tool_a.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> list, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, tooltipDisplay, list, tooltipFlag);
+        list.accept(Component.translatable("item.cow_tools.tool_a.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
     }
 
     public static void grantTool(PlayerInteractEvent.EntityInteract entityInteractEvent) {

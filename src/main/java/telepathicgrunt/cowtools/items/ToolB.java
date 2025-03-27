@@ -17,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,6 +27,7 @@ import telepathicgrunt.cowtools.CowToolsMod;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class ToolB extends Item {
     private static final TagKey<EntityType<?>> ADDITIONAL_CAN_PULL = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_additional_can_pull"));
@@ -37,13 +39,13 @@ public class ToolB extends Item {
     }
 
     public static Tool createToolProperties() {
-        return new Tool(List.of(), 1.0F, 1);
+        return new Tool(List.of(), 1.0F, 1, true);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
-        list.add(Component.translatable("item.cow_tools.tool_b.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> list, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, tooltipDisplay, list, tooltipFlag);
+        list.accept(Component.translatable("item.cow_tools.tool_b.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
     }
 
     public static void grantTool(PlayerInteractEvent.EntityInteract entityInteractEvent) {

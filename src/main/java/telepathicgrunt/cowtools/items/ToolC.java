@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -21,6 +22,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import telepathicgrunt.cowtools.CowToolsMod;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ToolC extends Item {
     private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cow_trade"));
@@ -33,13 +35,13 @@ public class ToolC extends Item {
 
     public static Tool createToolProperties() {
         HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        return new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(DUPLICATE_DROPS_OF), 5.0F)), 1.0F, 1);
+        return new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(DUPLICATE_DROPS_OF), 5.0F)), 1.0F, 1, true);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
-        list.add(Component.translatable("item.cow_tools.tool_c.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> list, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, tooltipDisplay, list, tooltipFlag);
+        list.accept(Component.translatable("item.cow_tools.tool_c.hint").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
     }
 
     public static void grantTool(PlayerInteractEvent.EntityInteract entityInteractEvent) {
