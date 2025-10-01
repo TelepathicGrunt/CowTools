@@ -110,7 +110,7 @@ public class ToolB extends Item {
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
                 player.swing(rightClickItemEvent.getHand(), true);
                 player.sweepAttack();
-                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(rightClickItemEvent.getHand()));
+                stack.hurtAndBreak(1, player, rightClickItemEvent.getHand());
             }
         }
     }

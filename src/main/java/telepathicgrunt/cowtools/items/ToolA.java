@@ -72,7 +72,7 @@ public class ToolA extends Item {
             }
 
             Player player = rightClickBlockEvent.getEntity();
-            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(rightClickBlockEvent.getHand()));
+            stack.hurtAndBreak(1, player, rightClickBlockEvent.getHand());
             level.setBlock(rightClickBlockEvent.getHitVec().getBlockPos(), repairState, 3);
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_USE, player.getSoundSource(), 1.0F, 1.0F);
             player.swing(rightClickBlockEvent.getHand(), true);
