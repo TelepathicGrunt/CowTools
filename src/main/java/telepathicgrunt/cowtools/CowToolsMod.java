@@ -2,7 +2,7 @@ package telepathicgrunt.cowtools;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,7 +22,7 @@ import telepathicgrunt.cowtools.items.ToolC;
 public class CowToolsMod {
     public static final String MODID = "cow_tools";
 
-    public static final TagKey<EntityType<?>> COWS_FOR_GETTING_TOOLS = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "cows_for_getting_tools"));
+    public static final TagKey<EntityType<?>> COWS_FOR_GETTING_TOOLS = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "cows_for_getting_tools"));
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);

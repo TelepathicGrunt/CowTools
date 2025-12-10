@@ -6,11 +6,10 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,8 +28,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ToolA extends Item {
-    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
-    private static final TagKey<Block> CANNOT_REVERT_STATE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cannot_revert_state"));
+    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cow_trade"));
+    private static final TagKey<Block> CANNOT_REVERT_STATE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_a_cannot_revert_state"));
 
     public ToolA(Properties itemProperty) {
         super(itemProperty.durability(64).component(DataComponents.TOOL, createToolProperties()));
@@ -85,10 +84,10 @@ public class ToolA extends Item {
             return null;
         }
 
-        ResourceLocation rl = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        Identifier rl = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         String modifiedPath = modifiedPath(rl.getPath());
         if (modifiedPath != null) {
-            Optional<Holder.Reference<Block>> blockOptional = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), modifiedPath));
+            Optional<Holder.Reference<Block>> blockOptional = BuiltInRegistries.BLOCK.get(Identifier.fromNamespaceAndPath(rl.getNamespace(), modifiedPath));
             if (blockOptional.isPresent() && !blockOptional.get().value().defaultBlockState().isAir()) {
                 BlockState newState = blockOptional.get().value().defaultBlockState();
                 for (Property<?> property : state.getProperties()) {

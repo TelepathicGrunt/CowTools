@@ -6,7 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ToolC extends Item {
-    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cow_trade"));
-    private static final TagKey<Block> DUPLICATE_DROPS_OF = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_duplicate_drops_of"));
-    private static final TagKey<Block> CANNOT_DUPLICATE_DROPS_OF_EVER = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cannot_duplicate_drops_of_ever"));
+    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cow_trade"));
+    private static final TagKey<Block> DUPLICATE_DROPS_OF = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_duplicate_drops_of"));
+    private static final TagKey<Block> CANNOT_DUPLICATE_DROPS_OF_EVER = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_c_cannot_duplicate_drops_of_ever"));
 
     public ToolC(Properties itemProperty) {
         super(itemProperty.durability(1000).component(DataComponents.TOOL, createToolProperties()));

@@ -2,17 +2,20 @@ package telepathicgrunt.cowtools.items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -30,9 +33,9 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class ToolB extends Item {
-    private static final TagKey<EntityType<?>> ADDITIONAL_CAN_PULL = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_additional_can_pull"));
-    private static final TagKey<EntityType<?>> CANNOT_PULL_EVER = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cannot_pull_ever"));
-    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cow_trade"));
+    private static final TagKey<EntityType<?>> ADDITIONAL_CAN_PULL = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_additional_can_pull"));
+    private static final TagKey<EntityType<?>> CANNOT_PULL_EVER = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cannot_pull_ever"));
+    private static final TagKey<Item> COW_TRADE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CowToolsMod.MODID, "tool_b_cow_trade"));
 
     public ToolB(Properties itemProperty) {
         super(itemProperty.durability(300).component(DataComponents.TOOL, createToolProperties()));
@@ -109,7 +112,12 @@ public class ToolB extends Item {
             if (!entitiesToPull.isEmpty()) {
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
                 player.swing(rightClickItemEvent.getHand(), true);
-                player.sweepAttack();
+                player.playSound(SoundEvents.PLAYER_ATTACK_SWEEP);
+                if (level instanceof ServerLevel serverLevel) {
+                    double d0 = -Mth.sin(player.getYRot() * ((float)Math.PI / 180F));
+                    double d1 = Mth.cos(player.getYRot() * ((float)Math.PI / 180F));
+                    serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5F), player.getZ() + d1, 0, d0, 0.0F, d1, 0.0F);
+                }
                 stack.hurtAndBreak(1, player, rightClickItemEvent.getHand());
             }
         }
