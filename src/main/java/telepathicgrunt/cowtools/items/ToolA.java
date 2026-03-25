@@ -47,7 +47,7 @@ public class ToolA extends Item {
 
     public static void grantTool(PlayerInteractEvent.EntityInteract entityInteractEvent) {
         if (entityInteractEvent.getEntity() != null &&
-            entityInteractEvent.getTarget().getType().is(CowToolsMod.COWS_FOR_GETTING_TOOLS) &&
+            entityInteractEvent.getTarget().is(CowToolsMod.COWS_FOR_GETTING_TOOLS) &&
             entityInteractEvent.getItemStack().is(COW_TRADE))
         {
             if (!entityInteractEvent.getEntity().getAbilities().instabuild) {

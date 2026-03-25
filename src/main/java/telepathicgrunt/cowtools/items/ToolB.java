@@ -53,7 +53,7 @@ public class ToolB extends Item {
 
     public static void grantTool(PlayerInteractEvent.EntityInteract entityInteractEvent) {
         if (entityInteractEvent.getEntity() != null &&
-            entityInteractEvent.getTarget().getType().is(CowToolsMod.COWS_FOR_GETTING_TOOLS) &&
+            entityInteractEvent.getTarget().is(CowToolsMod.COWS_FOR_GETTING_TOOLS) &&
             entityInteractEvent.getItemStack().is(COW_TRADE))
         {
             if (!entityInteractEvent.getEntity().getAbilities().instabuild) {
@@ -79,8 +79,8 @@ public class ToolB extends Item {
             for (int i = 0; i < 3; i++) {
                 boundingBox = boundingBox.inflate(1.5, 1.5, 1.5).move(offset);
                 for (Entity entity : level.getEntitiesOfClass(Entity.class, boundingBox)) {
-                    if ((entity instanceof LivingEntity || entity instanceof Boat || entity instanceof Minecart || entity.getType().is(ADDITIONAL_CAN_PULL))
-                        && (!entity.getType().is(CANNOT_PULL_EVER)))
+                    if ((entity instanceof LivingEntity || entity instanceof Boat || entity instanceof Minecart || entity.is(ADDITIONAL_CAN_PULL))
+                        && (!entity.is(CANNOT_PULL_EVER)))
                     {
                         entitiesToPull.add(entity);
                     }
