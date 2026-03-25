@@ -1,11 +1,13 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.121'
+    id 'net.neoforged.moddev' version '2.0.141'
     id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
 apply plugin: "me.modmuss50.mod-publish-plugin"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
@@ -22,15 +24,9 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 neoForge {
     version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -70,6 +66,7 @@ dependencies {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs << "-Xmaxerrs" << "10000"
 }
 
 ////////////////////////////////////////////RELEASING/////////////////////////////////////////////
