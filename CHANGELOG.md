@@ -1,1 +1,1 @@
-Updated to 26.1
+Updated to 26.1.2 Minecraft and requires 26.1.2.22-beta NeoForge or newer

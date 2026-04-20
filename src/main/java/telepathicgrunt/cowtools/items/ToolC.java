@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import telepathicgrunt.cowtools.CowToolsMod;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class ToolC extends Item {
         }
     }
 
-    public static void oreBreak(BlockEvent.BreakEvent breakEvent) {
+    public static void oreBreak(BreakBlockEvent breakEvent) {
         if (breakEvent.getPlayer() != null && breakEvent.getLevel() instanceof ServerLevel serverLevel) {
             ItemStack stack = breakEvent.getPlayer().getMainHandItem();
             if (!stack.is(CowToolsMod.TOOL_C)) {
