@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -74,7 +75,7 @@ public class ToolA extends Item {
             stack.hurtAndBreak(1, player, rightClickBlockEvent.getHand());
             level.setBlock(rightClickBlockEvent.getHitVec().getBlockPos(), repairState, 3);
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_USE, player.getSoundSource(), 1.0F, 1.0F);
-            player.swing(rightClickBlockEvent.getHand(), true);
+            player.swing(rightClickBlockEvent.getHand(), SwingAnimation.DEFAULT, true);
             rightClickBlockEvent.setCancellationResult(InteractionResult.FAIL);
         }
     }

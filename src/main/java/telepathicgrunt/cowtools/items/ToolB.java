@@ -19,6 +19,7 @@ import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -111,7 +112,7 @@ public class ToolB extends Item {
 
             if (!entitiesToPull.isEmpty()) {
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
-                player.swing(rightClickItemEvent.getHand(), true);
+                player.swing(rightClickItemEvent.getHand(), SwingAnimation.DEFAULT, true);
                 player.playSound(SoundEvents.PLAYER_ATTACK_SWEEP);
                 if (level instanceof ServerLevel serverLevel) {
                     double d0 = -Mth.sin(player.getYRot() * ((float)Math.PI / 180F));
