@@ -8,6 +8,7 @@ modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 bannerFile="cowtools.png"
+iconFile="cowtools.png"
 authors="TelepathicGrunt"
 credits="CrispyTwig for textures!"
 description='''See https://en.wikipedia.org/wiki/Cow_tools for more details.'''
